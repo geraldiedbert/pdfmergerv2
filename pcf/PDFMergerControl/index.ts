@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
 import { IInputs, IOutputs } from './generated/ManifestTypes';
-import PDFMergerApp from '../src/PDFMergerApp';
+import PDFMergerApp from '../../src/PDFMergerApp';
 
 export class PDFMergerControl implements ComponentFramework.StandardControl<IInputs, IOutputs> {
   private root!: ReactDOM.Root;
