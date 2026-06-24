@@ -1,0 +1,70 @@
+name: Build PCF Solution
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Set up .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Install Power Platform CLI
+        run: dotnet tool install --global Microsoft.PowerApps.CLI.Tool
+
+      - name: Install root dependencies
+        run: npm install
+
+      - name: Install PCF dependencies
+        run: npm --prefix pcf install
+
+      - name: Build PCF bundle
+        run: npm --prefix pcf run build
+
+      - name: Init solution project
+        run: pac solution init --publisher-name PDFMergerPublisher --publisher-prefix pdfm --outputDirectory PDFMergerSolution
+
+      - name: Add PCF reference
+        working-directory: PDFMergerSolution
+        run: pac solution add-reference --path ../pcf
+
+      - name: Build solution package
+        working-directory: PDFMergerSolution
+        run: dotnet build --configuration Release /p:SolutionPackageType=Unmanaged
+
+      - name: Copy solution zip
+        shell: pwsh
+        run: |
+          $zip = Get-ChildItem -Path "PDFMergerSolution/bin/Release" -Filter *.zip | Select-Object -First 1
+          Copy-Item $zip.FullName "PDFMergerSolution_IMPORT_THIS.zip"
+
+      - name: Validate solution zip
+        shell: pwsh
+        run: |
+          Add-Type -AssemblyName System.IO.Compression.FileSystem
+          $zip = [System.IO.Compression.ZipFile]::OpenRead("PDFMergerSolution_IMPORT_THIS.zip")
+          $names = $zip.Entries | ForEach-Object { $_.Name }
+          $zip.Dispose()
+          if (-not ($names -contains "solution.xml") -or -not ($names -contains "customizations.xml")) {
+            throw "Solution zip is missing solution.xml or customizations.xml at its root."
+          }
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PDFMergerSolution_IMPORT_THIS.zip
+          path: PDFMergerSolution_IMPORT_THIS.zip
+          compression-level: 0

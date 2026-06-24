@@ -1,0 +1,8 @@
+node_modules/
+dist/
+pcf/out/
+pcf/generated/
+pcf/node_modules/
+PDFMergerSolution/
+*.zip
+.DS_Store

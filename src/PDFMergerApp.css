@@ -1,0 +1,28 @@
+.pdf-merger {
+  font-family: 'Segoe UI', sans-serif;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.pdf-merger__error {
+  color: #b00020;
+}
+
+.pdf-merger__list {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0;
+}
+
+.pdf-merger__list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.pdf-merger__controls button {
+  margin-left: 4px;
+}

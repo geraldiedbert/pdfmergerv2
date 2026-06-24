@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.PowerApps.MSBuild.Pcf">
+  <PropertyGroup>
+    <ProjectGuid>70fbafa9-4298-447d-abaf-ff5336baa52c</ProjectGuid>
+    <OutputPath>$(MSBuildThisFileDirectory)out\controls</OutputPath>
+    <PcfBuildMode>production</PcfBuildMode>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,9 @@
+{
+  "extends": "./node_modules/pcf-scripts/tsconfig_base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "outDir": "./out"
+  },
+  "include": ["index.ts", "../src/**/*.ts", "../src/**/*.tsx"],
+  "exclude": ["node_modules", "../src/_archive/**", "../src/main.tsx"]
+}
