@@ -3,7 +3,7 @@
   <control
     namespace="PDFMerger"
     constructor="PDFMergerControl"
-    version="0.0.1"
+    version="2.0.0"
     display-name-key="PDF Merger"
     description-key="Merges multiple PDF files into one and outputs the result as base64"
     control-type="standard">
