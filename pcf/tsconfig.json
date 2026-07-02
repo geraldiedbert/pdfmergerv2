@@ -4,6 +4,6 @@
     "jsx": "react-jsx",
     "typeRoots": ["node_modules/@types"]
   },
-  "include": ["PDFMergerControl/index.ts", "../src/**/*.ts", "../src/**/*.tsx"],
+  "include": ["PDFSolutionV4Control/index.ts", "../src/**/*.ts", "../src/**/*.tsx"],
   "exclude": ["node_modules", "../src/main.tsx"]
 }

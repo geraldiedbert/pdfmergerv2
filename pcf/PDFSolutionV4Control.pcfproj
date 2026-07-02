@@ -8,8 +8,8 @@
   <Import Project="$(PowerAppsTargetsPath)\Microsoft.PowerApps.VisualStudio.Pcf.props" Condition="Exists('$(PowerAppsTargetsPath)\Microsoft.PowerApps.VisualStudio.Pcf.props')" />
 
   <PropertyGroup>
-    <Name>PDFMergerControl</Name>
-    <ProjectGuid>70fbafa9-4298-447d-abaf-ff5336baa52c</ProjectGuid>
+    <Name>PDFSolutionV4Control</Name>
+    <ProjectGuid>fb4cec00-9bdf-4cca-9277-c3b3cabd99bf</ProjectGuid>
     <OutputPath>$(MSBuildThisFileDirectory)out\controls</OutputPath>
   </PropertyGroup>
 

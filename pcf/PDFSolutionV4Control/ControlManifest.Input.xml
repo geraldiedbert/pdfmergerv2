@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
   <control
-    namespace="PDFMerger"
-    constructor="PDFMergerControl"
-    version="2.0.0"
-    display-name-key="PDF Merger"
+    namespace="PDFSolutionV4"
+    constructor="PDFSolutionV4Control"
+    version="1.0.0"
+    display-name-key="PDF Solution V4"
     description-key="Merges multiple PDF files into one and outputs the result as base64"
     control-type="standard">
     <property

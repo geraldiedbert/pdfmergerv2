@@ -2,10 +2,11 @@ node_modules/
 dist/
 pcf/out/
 pcf/generated/
-pcf/PDFMergerControl/generated/
+pcf/PDFSolutionV4Control/generated/
 pcf/node_modules/
 pcf/obj/
 pcf/bin/
-PDFMergerSolution/
+PDFSolutionV4Solution/
 *.zip
 .DS_Store
+~/

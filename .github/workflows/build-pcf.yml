@@ -35,33 +35,33 @@ jobs:
         run: npm --prefix pcf run build
 
       - name: Init solution project
-        run: pac solution init --publisher-name PDFMergerPublisher --publisher-prefix pdfm --outputDirectory PDFMergerSolution
+        run: pac solution init --publisher-name PDFSolutionV4Publisher --publisher-prefix pdfv4 --outputDirectory PDFSolutionV4Solution
 
       - name: Set solution version
         shell: pwsh
         run: |
-          $path = "PDFMergerSolution/src/Other/Solution.xml"
-          (Get-Content $path) -replace '<Version>.*</Version>', '<Version>2.0.0.0</Version>' | Set-Content $path
+          $path = "PDFSolutionV4Solution/src/Other/Solution.xml"
+          (Get-Content $path) -replace '<Version>.*</Version>', '<Version>1.0.0.0</Version>' | Set-Content $path
 
       - name: Add PCF reference
-        working-directory: PDFMergerSolution
+        working-directory: PDFSolutionV4Solution
         run: pac solution add-reference --path ../pcf
 
       - name: Build solution package
-        working-directory: PDFMergerSolution
+        working-directory: PDFSolutionV4Solution
         run: dotnet build --configuration Release /p:SolutionPackageType=Unmanaged
 
       - name: Copy solution zip
         shell: pwsh
         run: |
-          $zip = Get-ChildItem -Path "PDFMergerSolution/bin/Release" -Filter *.zip | Select-Object -First 1
-          Copy-Item $zip.FullName "PDFMergerSolution_IMPORT_THIS.zip"
+          $zip = Get-ChildItem -Path "PDFSolutionV4Solution/bin/Release" -Filter *.zip | Select-Object -First 1
+          Copy-Item $zip.FullName "PDFSolutionV4Solution_IMPORT_THIS.zip"
 
       - name: Validate solution zip
         shell: pwsh
         run: |
           Add-Type -AssemblyName System.IO.Compression.FileSystem
-          $zip = [System.IO.Compression.ZipFile]::OpenRead("PDFMergerSolution_IMPORT_THIS.zip")
+          $zip = [System.IO.Compression.ZipFile]::OpenRead("PDFSolutionV4Solution_IMPORT_THIS.zip")
           $names = $zip.Entries | ForEach-Object { $_.Name }
           $zip.Dispose()
           if (-not ($names -contains "solution.xml") -or -not ($names -contains "customizations.xml")) {
@@ -71,6 +71,6 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: PDFMergerSolution_IMPORT_THIS.zip
-          path: PDFMergerSolution_IMPORT_THIS.zip
+          name: PDFSolutionV4Solution_IMPORT_THIS.zip
+          path: PDFSolutionV4Solution_IMPORT_THIS.zip
           compression-level: 0
